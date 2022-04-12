@@ -1,3 +1,4 @@
+-- By Mateusz Kolodziejczyk 20084190
 module TextRead where
 
 import Data.Text as T

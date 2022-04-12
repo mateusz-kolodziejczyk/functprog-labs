@@ -1,3 +1,5 @@
+
+-- By Mateusz Kolodziejczyk 20084190
 module Main where
 
 import TextRead
@@ -9,43 +11,47 @@ import Data.Function (on)
 import Data.Ord (comparing)
 main :: IO ()
 main = do
-    textVar <- TIO.readFile "example-text.txt"
-    dictVar <- TIO.readFile "english.txt"
+    -- Get the text file and dict file name
+    Prelude.putStrLn "Please Enter the name of the textfile"
+    textFile <- Prelude.getLine 
+    Prelude.putStrLn "Please Enter the name of the dictionary file"
+    dictFile <- Prelude.getLine
+
+    textVar <- TIO.readFile textFile
+    dictVar <- TIO.readFile dictFile
     -- Zip to store the indexes for later
     let words = Prelude.zip [0..] $ extractWords textVar
-
+    -- Store the dictionary as a list of words
     let dict = extractWords dictVar
+
     let dictChecker = containsCheck dict
 
+    -- Print out the initial words
+    Prelude.putStrLn "Initial Words"
+    print $ snd $ unzip words
+    -- Split the words into ones in the dictionary/ not in dictionary
     let notInDict = dictChecker Prelude.notElem words
     let inDict = dictChecker Prelude.elem words
     
+
+    -- Print out the words that will be changed
+
+    Prelude.putStrLn "Words not in Dictionary" 
+    print $ snd $ unzip notInDict
+    -- Fix the words getting user input
     newWords <- fixWords dict notInDict
-    let fixedWords = sortBy (comparing fst) (newWords ++ inDict)
+
+    -- Print out the changed words only
+    Prelude.putStrLn "Changed Words:" 
+    print $ snd $ unzip newWords
+
+    -- Concat dict and new words, sort new list by index in the tuple, unzip and get the words only
+    let fixedWords =  snd $ unzip $ sortBy (comparing fst) (newWords ++ inDict)
+
+
+    -- Use the report to print out the list of words in order
+    Prelude.putStrLn "Final Report: "
     print fixedWords
 
--- Taken from https://stackoverflow.com/questions/30380697/sort-tuples-by-one-of-their-elements-in-haskell
-indexSort :: Ord a => [(a, b)] -> [(a, b)]
-indexSort = sortBy (compare `on` fst)
-
-fixWords :: [Text] -> [(Int, Text)] -> IO [(Int, Text)]
-fixWords dict words = do
-    let unzipped = unzip words
-    let indexes = fst unzipped
-    let w = snd unzipped
-    newW <- mapM (\x -> getWord dict) w
-    let y = Prelude.zip indexes newW
-    return y
-
-getWord :: [Text] -> IO Text
-getWord dict = do
-    w <- TIO.getLine
-    if Prelude.elem w dict 
-        then do
-            print "inputed"
-            return w
-        else do
-            print "Not Found in Dictionary"
-            getWord dict
 
 

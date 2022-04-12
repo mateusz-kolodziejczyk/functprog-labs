@@ -1,3 +1,4 @@
+-- By Mateusz Kolodziejczyk 20084190
 module TextRead where
 
 import Data.Text as T
@@ -19,14 +20,30 @@ extractWords t =  ws
 --   fmt $ nameF (Data.Text.Internal.Builder.fromString msg)  $ unlinesF words
 allWordsReport :: String -> [Text] -> Text
 allWordsReport msg words =
-    (T.pack msg) <> (T.pack "\n") <> T.unlines words
+    (T.pack msg) <> (T.pack "\n") <> T.unlines ( Prelude.map (\x -> (T.pack " ") <> x) words)
 
 containsCheck :: [a] -> (a -> [a] -> Bool) -> [(Int, a)] -> [(Int, a)] 
 containsCheck checkedList func = Prelude.filter (\(_,y) -> func y checkedList)
 
-doEverything :: [Text] -> Text -> IO Text        
-doEverything dict word = do
-  w <- TIO.getLine
-  if Prelude.elem word dict 
-    then return w
-    else return w
+fixWords :: [Text] -> [(Int, Text)] -> IO [(Int, Text)]
+fixWords dict words = do
+    let unzipped = unzip words
+    let indexes = fst unzipped
+    let w = snd unzipped
+    newW <- mapM (getWord dict) w
+    let y = Prelude.zip indexes newW
+    return y
+
+getWord :: [Text] -> Text -> IO Text
+getWord dict t = do
+    -- Print out the word being changed
+    Prelude.putStrLn ""
+    print t
+    w <- TIO.getLine
+    if Prelude.elem w dict 
+        then do
+            Prelude.putStrLn "Word Found"
+            return w
+        else do
+            Prelude.putStrLn "Not Found in Dictionary"
+            getWord dict t

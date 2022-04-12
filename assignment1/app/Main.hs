@@ -1,3 +1,4 @@
+-- By Mateusz Kolodziejczyk 20084190
 module Main where
 
 import TextRead
