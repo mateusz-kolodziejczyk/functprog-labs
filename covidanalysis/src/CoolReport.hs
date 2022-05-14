@@ -1,7 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module StatReport where
+module CoolReport where
 
 import Data.Ord (comparing)
 import Data.Foldable (minimumBy, maximumBy)

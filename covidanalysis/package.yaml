@@ -1,4 +1,4 @@
-name: stockquotes
+name: covidanalysis
 version: 0.5
 description: This package provides source code from the stockquotes example which accompany the book"Haskell in Depth" by Vitaly Bragilevsky (Manning Publications 2020).
 
@@ -30,7 +30,7 @@ library:
   source-dirs: src
 
 executables:
-  stockquotes-exe:
+  covidanalysis-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -38,7 +38,7 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - stockquotes
+    - covidanalysis
 
 tests:
   stockquotes-test:
@@ -49,4 +49,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - stockquotes
+    - covidanalysis

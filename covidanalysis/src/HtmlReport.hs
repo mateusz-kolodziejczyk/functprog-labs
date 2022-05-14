@@ -13,7 +13,7 @@ import Text.Blaze.Colonnade
 import Fmt (pretty, Buildable)
 
 import QuoteData
-import StatReport
+import CoolReport
 
 viaFmt :: Buildable a => a -> Html
 viaFmt = text . pretty

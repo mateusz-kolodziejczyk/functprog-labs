@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.4.
+-- This file has been generated from package.yaml by hpack version 0.34.2.
 --
 -- see: https://github.com/sol/hpack
 
-name:           stockquotes
+name:           covidanalysis
 version:        0.5
 description:    This package provides source code from the stockquotes example which accompany the book"Haskell in Depth" by Vitaly Bragilevsky (Manning Publications 2020).
 license:        BSD3
@@ -16,12 +16,15 @@ extra-source-files:
 
 library
   exposed-modules:
+      CoolReport
+      CovidData
       HtmlReport
       Lib
       QuoteData
       StatReport
+      Util
   other-modules:
-      Paths_stockquotes
+      Paths_covidanalysis
   hs-source-dirs:
       src
   build-depends:
@@ -37,10 +40,10 @@ library
     , vector
   default-language: Haskell2010
 
-executable stockquotes-exe
+executable covidanalysis-exe
   main-is: Main.hs
   other-modules:
-      Paths_stockquotes
+      Paths_covidanalysis
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
@@ -51,8 +54,8 @@ executable stockquotes-exe
     , bytestring
     , cassava
     , colonnade
+    , covidanalysis
     , fmt
-    , stockquotes
     , text
     , time
     , vector
@@ -62,7 +65,7 @@ test-suite stockquotes-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_stockquotes
+      Paths_covidanalysis
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
@@ -73,8 +76,8 @@ test-suite stockquotes-test
     , bytestring
     , cassava
     , colonnade
+    , covidanalysis
     , fmt
-    , stockquotes
     , text
     , time
     , vector
