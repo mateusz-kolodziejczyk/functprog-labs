@@ -28,11 +28,11 @@ generateReports :: (Functor t, Foldable t) =>
                  String ->  t CovidData -> IO ()
 generateReports htmlFl covidData = do
   putStr textRpt
-  --BL.writeFile htmlFl htmlRpt
+  BL.writeFile htmlFl htmlRpt
  where
    statInfo' = statInfo covidData
    textRpt = textReport statInfo'
-   --htmlRpt = htmlReport  quotes statInfo' 
+   htmlRpt = htmlReport covidData statInfo' 
 
 
 
