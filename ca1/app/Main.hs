@@ -1,14 +1,12 @@
-
 -- By Mateusz Kolodziejczyk 20084190
 module Main where
 
 import TextRead
 import Data.Text.IO as TIO
 import Data.Text as T
-import Control.Monad
 import Data.List (sortBy)
-import Data.Function (on)
 import Data.Ord (comparing)
+
 main :: IO ()
 main = do
     -- Get the text file and dict file name
