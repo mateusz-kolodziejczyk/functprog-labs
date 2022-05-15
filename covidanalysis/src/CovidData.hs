@@ -44,6 +44,7 @@ data CField = TotalCases | NewCases | TotalDeaths | NewDeaths | ReproductionRate
 
 parseDTZ :: DefaultToZero -> Double
 parseDTZ (DefaultToZero d) = d
+
 field2fun :: CField -> CovidData -> Double
 field2fun TotalCases = total_cases
 field2fun NewCases = new_cases
