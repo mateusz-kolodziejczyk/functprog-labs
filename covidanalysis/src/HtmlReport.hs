@@ -25,19 +25,10 @@ colStats = mconcat
       , headed "Min" (viaFmt . minVal)
       , headed "Max" (viaFmt . maxVal)
       , headed "Days between Min/Max" (viaFmt . daysBetweenMinMax)
+      , headed "Max 10 day average" (viaFmt . maxMAvg)
+      , headed "Mean 10 day average" (viaFmt . meanMAvg)
       ]
 
-                  --  date :: Day,
-                  --  total_cases :: Double,
-                  --  new_cases :: Double,
-                  --  total_deaths :: DefaultToZero,
-                  --  new_deaths :: DefaultToZero,
-                  --  reproduction_rate :: DefaultToZero,
-                  --  icu_patients :: DefaultToZero,
-                  --  total_vaccinations :: DefaultToZero,
-                  --  people_vaccinated :: DefaultToZero,
-                  --  people_fully_vaccinated :: DefaultToZero,
-                  --  new_vaccinations  :: DefaultToZero
 colData :: Colonnade Headed CovidData Html
 colData = mconcat
       [ headed "Date" (viaFmt . date),
@@ -64,7 +55,7 @@ htmlReport covidData statEntries  = renderHtml $ docTypeHtml $ do
        h1 "Statistics Report"
        encodeHtmlTable mempty colStats statEntries
 
-       h1 "Covid Data Data"
+       h1 "Covid Data"
        encodeHtmlTable mempty colData covidData
   where
     tableStyle = "table {border-collapse: collapse}" <>

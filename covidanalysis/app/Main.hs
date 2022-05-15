@@ -56,5 +56,5 @@ readData fpath = do
   csvData <- BL.readFile fpath
   case decodeByName csvData of
     Left err -> error err
-    Right (_, quotes) -> pure (V.toList quotes)
+    Right (_, covidData) -> pure (V.toList covidData)
     
